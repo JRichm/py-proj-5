@@ -9,9 +9,12 @@ class User(db.Model):
     __tablename__ = 'users'
     
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String(255), unique=True, nullable=False)
-    user_password = db.Column(db.String(255), nullable=False)
-    user_email = db.Column(db.String(255), nullable=True)
+    user_name = db.Column(db.String(), unique=True, nullable=False)
+    user_password = db.Column(db.String(), nullable=False)
+    user_email = db.Column(db.String(), nullable=True)
+    
+    # user.ratings variable available through 'Rating' backref
+    # ratings = a list of Rating objects 
     
     def __repr__(self):
         return f'<User Data:\n\t{self.user_name} ({self.user_id})\n\t{self.user_email}>'
@@ -34,9 +37,13 @@ class Movie(db.Model):
     __tablename__ = 'movies'
     
     movie_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    movie_title = db.Column(db.String(255), nullable=False)
+    movie_title = db.Column(db.String(), nullable=False)
     movie_description = db.Column(db.Text(), nullable=True)
     movie_release_date = db.Column(db.DateTime(), nullable=False)
+    movie_poster_path = db.Column(db.String(), nullable=False)
+    
+    # movie.ratings variable available through 'Rating' backref
+    # ratings = a list of Rating objects 
     
     def __repr__(self):
         return f'<Movie Data\n\t{self.movie_title} ({self.movie_id})\n\t{self.movie_description}\n\t{self.movie_release_date}>'
