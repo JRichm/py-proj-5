@@ -1,2 +1,4 @@
 venv
 config.sh
+seed_database.py
+seed_database
