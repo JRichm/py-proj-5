@@ -26,6 +26,12 @@ def all_movies():
     movies = crud.get_movies()
     return render_template('movies.html', movies=movies)
 
+##      """  View Movie  """     ##
+@app.route('/movies/<movie_id>')
+def show_movie(movie_id):
+    movie = crud.get_movie_by_id(movie_id)
+    return render_template('movie_details.html', movie=movie)
+
 
 #####   #  Server Methods  #   #####
 if __name__ == "__main__":
