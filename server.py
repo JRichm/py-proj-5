@@ -18,7 +18,14 @@ def homepage():
 ##      """  View Users  """     ##
 @app.route('/users')
 def all_users():
-    return render_template('users.html')
+    users = crud.get_users()
+    return render_template('users.html', users=users)
+
+##      """  View User   """     ##
+@app.route('/users/<user_id>')
+def show_user(user_id):
+    user = crud.get_user_by_id(user_id)
+    return render_template('user_details.html', user=user)
 
 ##      """  View Movies """     ##
 @app.route('/movies')
