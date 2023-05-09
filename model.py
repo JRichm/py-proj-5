@@ -5,6 +5,9 @@ import os
 
 db = SQLAlchemy()
 
+
+"""  ####   Table Models   ####  """
+##       """ User Class """       ##
 class User(db.Model):
     __tablename__ = 'users'
     
@@ -19,6 +22,8 @@ class User(db.Model):
     def __repr__(self):
         return f'<User Data:\n\t{self.user_name} ({self.user_id})\n\t{self.user_email}>'
         
+        
+##      """ Rating Class """      ##
 class Rating(db.Model):
     __tablename__ = 'ratings'
     
@@ -33,6 +38,8 @@ class Rating(db.Model):
     def __repr__(self):
         return f'<Rating Data\n\tRating ID: {self.rating_id}\n\tMovie ID: {self.rating_movie_id}\n\tScore: {self.rating_score}\n\tUser: {self.rating_user_id}>'
 
+
+##      """ Movie Class """       ##
 class Movie(db.Model):
     __tablename__ = 'movies'
     
@@ -48,6 +55,9 @@ class Movie(db.Model):
     def __repr__(self):
         return f'<Movie Data\n\t{self.movie_title} ({self.movie_id})\n\t{self.movie_description}\n\t{self.movie_release_date}>'
 
+
+
+"""  ####    DB Config     ####  """
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["POSTGRES_URI"]
