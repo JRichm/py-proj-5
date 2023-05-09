@@ -24,6 +24,9 @@ def create_rating(user, movie, score):
     rating = Rating(rating_score=score, rating_movie_id=movie, rating_user_id=user)
     return rating
 
+def get_movies():
+    return Movie.query.all()
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
