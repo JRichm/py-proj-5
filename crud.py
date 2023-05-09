@@ -20,12 +20,8 @@ def create_movie(title, description, release_date, poster_path):
     )
     return movie
     
-def create_rating(score, movie, user):
-    rating = Rating(
-        rating_score = score,
-        rating_movie = movie, 
-        movie_user = user
-    )
+def create_rating(user, movie, score):
+    rating = Rating(rating_score=score, rating_movie_id=movie, rating_user_id=user)
     return rating
 
 if __name__ == '__main__':
