@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 from jinja2 import  StrictUndefined
 import crud
+import forms
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -15,27 +16,19 @@ app.jinja_env.undefined = StrictUndefined
 ##     """  View homepage """    ##
 @app.route('/')
 def homepage():
-    return render_template('homepage.html')
+    return render_template('homepage.html', form=forms.LoginForm())
 
 ##      """   New User   """     ##
 @app.route('/users', methods=['POST'])
 def register_user():
-    
-    username = request.form.get('username')
-    email = request.form.get('email')
-    password = request.form.get('password')
-    
-    if not crud.get_user_by_email(email):
-        if not crud.get_user_by_username(username):
-            new_user = crud.create_user(username, password, email)
-            db.session.add(new_user)
-            db.session.commit()
-        else:
-            flash(f'Username {username} already in use! Try again.')
-    else:
-        flash('Invalid Email! Try logging in or enter a different email address.')
-        
-    return redirect('/')
+    form = forms.CreateAccoutForm(request.form)
+    return form.create_user()
+
+##      """  User Login  """     ##
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm(request.form)
+    return form.login_user()
     
 ##      """  View Users  """     ##
 @app.route('/users', methods=['GET'])
@@ -63,6 +56,7 @@ def show_movie(movie_id):
 
 
 """  ####  Server Methods ####  """
+    
 
 if __name__ == "__main__":
     connect_to_db(app)
