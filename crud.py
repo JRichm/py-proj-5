@@ -27,7 +27,6 @@ def create_rating(user, movie, score):
 
 
 """ #        Get Methods        # """
-
   # movies
 def get_movies():
     return Movie.query.all()
@@ -39,9 +38,17 @@ def get_movie_by_id(movie_id):
 def get_users():
     return User.query.all()
 
-def get_user_by_id(movie_id):
-    return User.query.get(movie_id)
+def get_user_by_id(user_id):
+    return User.query.get(user_id)
 
+def get_user_by_email(email):
+    return User.query.filter(User.user_email == email).first()
+
+def get_user_by_username(username):
+    return User.query.filter(User.user_name == username).first()
+
+
+""" #      Server Methods       # """
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

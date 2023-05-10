@@ -12,13 +12,33 @@ app.jinja_env.undefined = StrictUndefined
 
 """  ####   Flask Routes   ####  """
 
-##      """ View homepage """     ##
+##     """  View homepage """    ##
 @app.route('/')
 def homepage():
     return render_template('homepage.html')
 
+##      """   New User   """     ##
+@app.route('/users', methods=['POST'])
+def register_user():
+    
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    
+    if not crud.get_user_by_email(email):
+        if not crud.get_user_by_username(username):
+            new_user = crud.create_user(username, password, email)
+            db.session.add(new_user)
+            db.session.commit()
+        else:
+            flash(f'Username {username} already in use! Try again.')
+    else:
+        flash('Invalid Email! Try logging in or enter a different email address.')
+        
+    return redirect('/')
+    
 ##      """  View Users  """     ##
-@app.route('/users')
+@app.route('/users', methods=['GET'])
 def all_users():
     users = crud.get_users()
     return render_template('users.html', users=users)
