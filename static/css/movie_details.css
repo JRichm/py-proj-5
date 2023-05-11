@@ -1,0 +1,91 @@
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+main > * {
+    margin: 25px;
+}
+
+main h1, p, label {
+    color: white;
+}
+
+section {
+    width: 666px;
+    justify-content: center;
+    height: 100%;
+}
+
+section h1 {
+    font-size: 50px;
+    font-style: italic;
+    margin: 5px;
+}
+
+#movie-picture {
+    max-width: 500px;
+}
+
+#movie-detail-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 22px;
+}
+
+#movie-detail-area span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#user-rating-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 22px;
+}
+
+#rating-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#user-rating-label {
+    align-self: flex-start;
+    margin: 22px;
+}
+
+.input-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#submit-user-rating {
+    display: block;
+    width: 22%;
+}
+
+#movie-ratings {
+    width: 100%;
+    height: 100%;
+}
+
+#movie-ratings span {
+    display: flex;
+    justify-content: space-around;
+}
+
+#movie-ratings li {
+    display: flex;
+    justify-content: space-around;
+    list-style:none;
+}

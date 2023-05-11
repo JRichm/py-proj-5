@@ -52,7 +52,8 @@ def all_movies():
 @app.route('/movies/<movie_id>')
 def show_movie(movie_id):
     movie = crud.get_movie_by_id(movie_id)
-    return render_template('movie_details.html', movie=movie)
+    movieRatings = crud.get_movie_ratings(movie_id)
+    return render_template('movie_details.html', movie=movie, movieRatings=movieRatings)
 
 
 """  ####  Server Methods ####  """

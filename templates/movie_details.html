@@ -1,7 +1,68 @@
 {% extends 'base.html' %}
 {% block title %}{{ movie.movie_title }} - Details{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/movie_details.css">
+{% endblock %}
 {% block body %}
-    <h1>{{ movie.movie_title }}</h1>
-    <p>{{ movie.movie_description }}</p>
-    <img src="{{ movie.movie_poster_path }}">
+    <main>
+        <aside>
+            <img id='movie-picture' src="{{ movie.movie_poster_path }}">
+        </aside>
+        <section>
+            <article>
+                <h1>{{ movie.movie_title }}</h1>
+                <p>{{ movie.movie_description }}</p>
+            </article>
+            <article id="movie-detail-area">
+                <span>
+                    <p>Release Date:</p>
+                    <p>{{ movie.movie_release_date }}</p>
+                </span>
+                <span>
+                    <p>Movie Rating:</p>
+                    <p>get.movie.rating</p>
+                </span>
+            </article>
+            <form id="user-rating-area" action="/rate-movie" method='POST'>
+                <label for="submit" id="user-rating-label">Rate this movie!</label>
+                <span id="rating-buttons">
+                    <div class="input-button">
+                        <input type="radio" id="1" name="rating" value="1">
+                        <label for="user-rating">1</label>
+                    </div>
+                    <div class="input-button">
+                        <input type="radio" id="2" name="rating" value="2">
+                        <label for="user-rating">2</label>
+                    </div>
+                    <div class="input-button">
+                        <input type="radio" id="3" name="rating" value="3">
+                        <label for="user-rating">3</label>
+                    </div>
+                    <div class="input-button">
+                        <input type="radio" id="4" name="rating" value="4">
+                        <label for="user-rating">4</label>
+                    </div>
+                    <div class="input-button">
+                        <input type="radio" id="5" name="rating" value="5">
+                        <label for="user-rating">5</label>
+                    </div>
+                    <input type="submit" name="submit" id="submit-user-rating">
+                </span>
+            </form>
+            <div id="movie-ratings">
+                <span>
+                    <p>Username</p>
+                    <p>Rating</p>
+                </span>
+                <ul>
+                    {% for rating in movieRatings %}
+                        <li>
+                            <p>{{ rating.user.user_name }}</p>
+                            <p>{{ rating.rating_score }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
 {% endblock %}

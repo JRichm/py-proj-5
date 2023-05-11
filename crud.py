@@ -34,6 +34,7 @@ def get_movies():
 def get_movie_by_id(movie_id):
     return Movie.query.get(movie_id)
 
+
   # users
 def get_users():
     return User.query.all()
@@ -46,6 +47,11 @@ def get_user_by_email(email):
 
 def get_user_by_username(username):
     return User.query.filter(User.user_name == username).first()
+
+
+  # ratings
+def get_movie_ratings(movie_id):
+    return Rating.query.filter(Rating.rating_movie_id==movie_id).all()
 
 
 """ #      Server Methods       # """
