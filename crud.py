@@ -51,7 +51,21 @@ def get_user_by_username(username):
 
   # ratings
 def get_movie_ratings(movie_id):
-    return Rating.query.filter(Rating.rating_movie_id==movie_id).all()
+    all_ratings = Rating.query.filter(Rating.rating_movie_id==movie_id).all()
+    return all_ratings
+
+def get_movie_avg_rating(movie_id):
+    all_ratings = Rating.query.filter(Rating.rating_movie_id==movie_id).all()
+    ratings = [0, 0]
+    for rating in all_ratings:
+        ratings[0] = ratings[0] + 1
+        ratings[1] = ratings[1] + rating.rating_score
+    
+    if not ratings[0] == 0:
+        ratings = str(round(ratings[1] / ratings[0], 1))
+    else:
+        ratings = 'No Data'
+    return ratings
 
 
 """ #      Server Methods       # """

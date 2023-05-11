@@ -20,7 +20,7 @@
                 </span>
                 <span>
                     <p>Movie Rating:</p>
-                    <p>get.movie.rating</p>
+                    <p>{{ movieAvgRating }}</p>
                 </span>
             </article>
             <form id="user-rating-area" action="/rate-movie" method='POST'>
@@ -51,17 +51,15 @@
             </form>
             <div id="movie-ratings">
                 <span>
-                    <p>Username</p>
-                    <p>Rating</p>
+                    <p style="font-weight:bold; text-decoration-line:underline;">Username</p>
+                    <p style="font-weight:bold; text-decoration-line:underline;">Rating</p>
                 </span>
-                <ul>
-                    {% for rating in movieRatings %}
-                        <li>
-                            <p>{{ rating.user.user_name }}</p>
-                            <p>{{ rating.rating_score }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% for rating in movieRatings %}
+                    <span>
+                        <p>{{ rating.user.user_name }}</p>
+                        <p>{{ rating.rating_score }}</p>
+                    </span>
+                {% endfor %}
             </div>
         </section>
     </main>
