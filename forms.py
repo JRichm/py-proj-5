@@ -4,6 +4,9 @@ from flask import session, flash, redirect, render_template
 from model import connect_to_db, db 
 import crud
 
+
+""" #                 Flask Forms                  #""" 
+
 class LoginForm(FlaskForm):
     
     username = StringField('username', [validators.InputRequired()])

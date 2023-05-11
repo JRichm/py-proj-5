@@ -56,7 +56,6 @@ def show_movie(movie_id):
 
 
 """  ####  Server Methods ####  """
-    
 
 if __name__ == "__main__":
     connect_to_db(app)

@@ -1,0 +1,36 @@
+#movie-pictures {
+    display: grid;
+    grid-template-columns: 300px 300px 300px 300px;
+    width: 100%;
+    row-gap: 75px;
+    column-gap: 75px;
+    justify-content: center;
+}
+
+.movie-item {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    border-radius: 0px;
+}
+
+.movie-item:hover {
+    box-shadow: 0px 0px 2px 2px white;
+    border-radius: 25px;
+    transition-property: border-radius;
+    transition-duration: 0.5s;
+    transition-timing-function:cubic-bezier(0.05, 0.46, 0.45, 0.94);
+}
+
+.small-movie-pic {
+    max-width: 300px;
+    border-radius: 0px;
+}
+
+.small-movie-pic:hover {
+    border-radius: 25px;
+    transition: border_radius 2s;
+    transition-property: border-radius;
+    transition-duration: 0.5s;
+    transition-timing-function:cubic-bezier(0.05, 0.46, 0.45, 0.94);
+}

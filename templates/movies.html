@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}View All Movies{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/movies.css">
+{% endblock %}
 {% block body %}
-{% for movie in movies %}
-    <li>
-        <a href="/movies/{{ movie.movie_id }}">{{ movie.movie_title }}</a>
-    </li>
-{% endfor %}
+    <main id="movie-pictures">
+        {% for movie in movies %}
+            <a href="/movies/{{ movie.movie_id }}" class="movie-item">
+                <img class='small-movie-pic' src="{{ movie.movie_poster_path }}">
+            </a>
+        {% endfor %}    
+    </main>
 {% endblock %}
