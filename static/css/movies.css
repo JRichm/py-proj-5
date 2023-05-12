@@ -12,6 +12,7 @@
     justify-content: center;
     width: 300px;
     border-radius: 0px;
+    transition-timing-function:cubic-bezier(0.05, 0.46, 0.45, 0.94);
 }
 
 .movie-item:hover {
@@ -25,6 +26,7 @@
 .small-movie-pic {
     max-width: 300px;
     border-radius: 0px;
+    transition-timing-function:cubic-bezier(0.05, 0.46, 0.45, 0.94);
 }
 
 .small-movie-pic:hover {

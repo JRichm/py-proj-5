@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, validators
+from wtforms import PasswordField, StringField, RadioField, validators
 from flask import session, flash, redirect, render_template
 from model import connect_to_db, db 
 import crud
@@ -28,7 +28,7 @@ class LoginForm(FlaskForm):
                 return redirect('/')
             
             # store username in session to keep track of logged in user
-            session['username'] = user.user_name
+            session['user_id'] = user.user_id
             flash('Successfully Logged In!')
             return redirect('/')
         
@@ -61,4 +61,29 @@ class CreateAccoutForm(FlaskForm):
             flash('Invalid Email! Try logging in or enter a different email address.')
             
         return redirect('/')
+
+class RateMovieForm(FlaskForm):
+    
+    options = RadioField('Rate this movie!', choices=[
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5')
+    ])
+    
+    def add_rating(self, movie_id, user_id):
         
+        if user_id or crud.get_user_by_id(user_id):
+            if movie_id or crud.get_movie_by_id(movie_id):
+                score = self.options.data
+                new_rating = crud.create_rating(user_id, movie_id, score)
+                db.session.add(new_rating)
+                db.session.commit()
+                flash(f'{crud.get_user_by_id(user_id).user_name} rated {crud.get_movie_by_id(movie_id).movie_title} with a score of {score} out of 5')
+            else:
+                flash('Error rating movie! Try again.')
+        else:
+            flash('Log in to rate movies!')
+        
+        return redirect(f'/movies/{movie_id}')

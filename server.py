@@ -12,7 +12,6 @@ app.jinja_env.undefined = StrictUndefined
 
 
 """  ####   Flask Routes   ####  """
-
 ##     """  View homepage """    ##
 @app.route('/')
 def homepage():
@@ -51,13 +50,25 @@ def all_movies():
 ##      """  View Movie  """     ##
 @app.route('/movies/<movie_id>')
 def show_movie(movie_id):
+    session['movie_id'] = movie_id
     movie = crud.get_movie_by_id(movie_id)
     movieRatings = crud.get_movie_ratings(movie_id)
     movieAvgRating = crud.get_movie_avg_rating(movie_id)
     return render_template('movie_details.html',
                            movie=movie,
                            movieRatings=movieRatings,
-                           movieAvgRating=movieAvgRating)
+                           movieAvgRating=movieAvgRating,
+                           form=forms.RateMovieForm())
+
+##      """  Rate Movie  """     ##
+@app.route('/rate-movie', methods=['POST'])
+def rate_movie():
+    
+    print('\nThis is my user_id:')
+    print(session['user_id'])
+    
+    form = forms.RateMovieForm(request.form)
+    return form.add_rating(session['movie_id'], session['user_id'])
 
 
 """  ####  Server Methods ####  """
