@@ -66,7 +66,7 @@ def get_movie_avg_rating(movie_id):
         ratings = 'No Data'
     return ratings
 
-def movie_rated_by_user(movie_id, user_id):
+def get_rating(movie_id, user_id):
     user_rating = Rating.query.filter(Rating.rating_movie_id==movie_id).filter(Rating.rating_user_id==user_id).first()
     if user_rating:
         return user_rating  

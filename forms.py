@@ -70,7 +70,7 @@ class RateMovieForm(FlaskForm):
         ('3', '3'),
         ('4', '4'),
         ('5', '5')
-    ], render_kw={})
+    ])
     
     def add_rating(self, movie_id, user_id):
         
@@ -78,24 +78,25 @@ class RateMovieForm(FlaskForm):
         if user_id or crud.get_user_by_id(user_id):
             if movie_id and crud.get_movie_by_id(movie_id):
                 
+                rating = crud.get_rating(movie_id, user_id)
+                
                  # if user has not rated the movie before
-                if not crud.movie_rated_by_user(movie_id, user_id):
+                if not rating:
                     score = self.options.data
                     new_rating = crud.create_rating(user_id, movie_id, score)
                     db.session.add(new_rating)
                     db.session.commit()
-                    flash(f'movie_rated_by_user({movie_id}, {user_id}):\n{crud.movie_rated_by_user(movie_id, user_id)}')
+                    flash(f'get_rating({movie_id}, {user_id}):\n{crud.get_rating(movie_id, user_id)}')
                     
                  # if user has already submited a rating for this movie
                 else:
                     new_score = self.options.data
-                    old_rating = crud.movie_rated_by_user(movie_id, user_id)
-                    updated_rating = crud.update_rating(old_rating, new_score)
-                    db.session.add(updated_rating)
+                    old_rating = crud.get_rating(movie_id, user_id)
+                    old_rating.rating_score = new_score
                     db.session.commit()
-                    flash(f'movie_rated_by_user({movie_id}, {user_id}):\n{crud.movie_rated_by_user(movie_id, user_id)}')
+                    flash(f'get_rating({movie_id}, {user_id}):\n{crud.get_rating(movie_id, user_id)}')
                 
-                flash(f'{crud.get_user_by_id(user_id).user_name} rated {crud.get_movie_by_id(movie_id).movie_title} with a score of {score} out of 5')
+                flash(f'{crud.get_user_by_id(user_id).user_name} rated {crud.get_movie_by_id(movie_id).movie_title} with a score of {new_score} out of 5')
             else:
                 flash('Error rating movie! Try again.')
         else:
