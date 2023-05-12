@@ -30,12 +30,20 @@
         {% endwith %}
       </div>
       <article>
-        <a href="" id="user-name"><p>user</p></a>
-        <span>
-          <a href=""><p>settings</p></a>
-          <p>|</p>
-          <a href=""><p>logout</p></a>
-        </span>
+        {% if username %}
+          <!-- Content for logged-in user -->
+          <a href="" id="user-name"><p>{{ username }}</p></a>
+          <span>
+            <a href=""><p>settings</p></a>
+            <p>|</p>
+            <a href="/logout"><p>logout</p></a>
+          </span>
+        {% else %}
+          <!-- Content for guest user -->
+          <span>
+            <a href="/"><p>Login</p></a>
+          </span>
+        {% endif %}
       </article>
     </header>
     

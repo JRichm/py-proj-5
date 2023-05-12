@@ -31,7 +31,7 @@ class LoginForm(FlaskForm):
             # store username in session to keep track of logged in user
             session['user_id'] = user.user_id
             flash('Successfully Logged In!', 'success')
-            return redirect('/')
+            return redirect('/movies')
         
         # form has not been submitted or data was not valid
         print('\tSomething Wen\'t Wrong')
@@ -58,6 +58,11 @@ class CreateAccoutForm(FlaskForm):
                 new_user = crud.create_user(username, password, email)
                 db.session.add(new_user)
                 db.session.commit()
+                
+                # get user id and log in user
+                session['user_id'] = crud.get_user_by_email(email).user_id
+                flash('Successfully created account!', 'success')
+                return redirect('/movies')
             else:
                 flash(f'Username {username} already in use! Try again.', 'danger')
         else:
