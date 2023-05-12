@@ -14,11 +14,11 @@
   <body>
     <header>
       <section>
-        <a href="/">Home</a>
-        <p>|</p>
-        <a href="/movies">Movies</a>
-        <p>|</p>
-        <a href="/users">Users</a>
+        <a href="/"> Home </a>
+        <p> | </p>
+        <a href="/movies"> Movies </a>
+        <p> | </p>
+        <a href="/users"> Users </a>
       </section>
       <div id="message-area">
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -38,10 +38,11 @@
         </span>
       </article>
     </header>
-
     
+    <div class="content-container">
+      {% block body %}{% endblock %}
+      {% block after_body %}{% endblock %}
 
-    {% block body %}{% endblock %}
-    {% block after_body %}{% endblock %}
+    </div>
   </body>
 </html>
