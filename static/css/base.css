@@ -12,3 +12,61 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+header {
+    background-color: #202124;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+    height: 150px;
+    margin-bottom: 47px;
+}
+
+header section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    margin: 50px;
+}
+
+header section a {
+    margin: 5px;
+    font-size: 25px;
+    color: white;
+}
+
+header section p {
+    margin: 5px;
+    font-size: 25px;
+    color: white;
+}
+
+header article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+
+header span {
+    display: flex;
+    flex-direction: row;
+}
+
+header p {
+    margin: 5px;
+    margin-top: 0px
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+#user-name {
+    font-size: larger;
+    margin-bottom: 0px;
+}

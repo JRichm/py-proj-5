@@ -10,8 +10,8 @@ import crud
     # login form
 class LoginForm(FlaskForm):
     
-    username = StringField('username', [validators.InputRequired()])
-    password = PasswordField('password', [validators.InputRequired()])
+    username = StringField('Username', [validators.InputRequired()])
+    password = PasswordField('Password', [validators.InputRequired()])
     
     def login_user(self):
         if self.validate_on_submit():

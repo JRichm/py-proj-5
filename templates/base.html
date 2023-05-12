@@ -12,6 +12,23 @@
   </head>
 
   <body>
+    <header>
+      <section>
+        <a href="/">Home</a>
+        <p>|</p>
+        <a href="/movies">Movies</a>
+        <p>|</p>
+        <a href="/users">Users</a>
+      </section>
+      <article>
+        <a href="" id="user-name"><p>user</p></a>
+        <span>
+          <a href=""><p>settings</p></a>
+          <p>|</p>
+          <a href=""><p>logout</p></a>
+        </span>
+      </article>
+    </header>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
         <div class="alert {% if category=='success' %}alert-success{% elif category=='danger' %}alert-danger{% elif category=='info' %}alert-info{% endif %}">
