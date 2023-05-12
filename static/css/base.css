@@ -70,3 +70,15 @@ header a {
     font-size: larger;
     margin-bottom: 0px;
 }
+
+#message-area {
+    display:flex;
+    flex-direction: column;
+    min-width: 500px;
+    width: fit-content;
+}
+
+#message-area div {
+    display: flex;
+    justify-content: center;
+}

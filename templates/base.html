@@ -20,6 +20,15 @@
         <p>|</p>
         <a href="/users">Users</a>
       </section>
+      <div id="message-area">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <div class="alert {% if category=='success' %}alert-success{% elif category=='danger' %}alert-danger{% elif category=='info' %}alert-info{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endwith %}
+      </div>
       <article>
         <a href="" id="user-name"><p>user</p></a>
         <span>
@@ -29,13 +38,8 @@
         </span>
       </article>
     </header>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% for category, message in messages %}
-        <div class="alert {% if category=='success' %}alert-success{% elif category=='danger' %}alert-danger{% elif category=='info' %}alert-info{% endif %}">
-          {{ message }}
-        </div>
-      {% endfor %}
-    {% endwith %}
+
+    
 
     {% block body %}{% endblock %}
     {% block after_body %}{% endblock %}

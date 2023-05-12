@@ -30,7 +30,7 @@ class LoginForm(FlaskForm):
             
             # store username in session to keep track of logged in user
             session['user_id'] = user.user_id
-            flash('Successfully Logged In!', 'successs')
+            flash('Successfully Logged In!', 'success')
             return redirect('/')
         
         # form has not been submitted or data was not valid
