@@ -62,11 +62,7 @@ def show_movie(movie_id):
 
 ##      """  Rate Movie  """     ##
 @app.route('/rate-movie', methods=['POST'])
-def rate_movie():
-    
-    print('\nThis is my user_id:')
-    print(session['user_id'])
-    
+def rate_movie():    
     form = forms.RateMovieForm(request.form)
     return form.add_rating(session['movie_id'], session['user_id'])
 

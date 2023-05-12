@@ -5,8 +5,9 @@ from model import connect_to_db, db
 import crud
 
 
-""" #                 Flask Forms                  #""" 
+""" #                 Flask Forms                  # """ 
 
+    # login form
 class LoginForm(FlaskForm):
     
     username = StringField('username', [validators.InputRequired()])
@@ -24,18 +25,20 @@ class LoginForm(FlaskForm):
             
             # check if user exists and if password is correct
             if not user or user.user_password != password:
-                flash('Incorrect password')
+                flash('Incorrect password', 'danger')
                 return redirect('/')
             
             # store username in session to keep track of logged in user
             session['user_id'] = user.user_id
-            flash('Successfully Logged In!')
+            flash('Successfully Logged In!', 'successs')
             return redirect('/')
         
         # form has not been submitted or data was not valid
         print('\tSomething Wen\'t Wrong')
         return render_template('homepage.html')
     
+    
+    # create account form
 class CreateAccoutForm(FlaskForm):
     
     username = StringField('username', [validators.InputRequired()])
@@ -56,12 +59,14 @@ class CreateAccoutForm(FlaskForm):
                 db.session.add(new_user)
                 db.session.commit()
             else:
-                flash(f'Username {username} already in use! Try again.')
+                flash(f'Username {username} already in use! Try again.', 'danger')
         else:
-            flash('Invalid Email! Try logging in or enter a different email address.')
+            flash('Invalid Email! Try logging in or enter a different email address.', 'danger')
             
         return redirect('/')
 
+
+    # rate movie form
 class RateMovieForm(FlaskForm):
     
     options = RadioField('Rate this movie!', choices=[
@@ -78,28 +83,27 @@ class RateMovieForm(FlaskForm):
         if user_id or crud.get_user_by_id(user_id):
             if movie_id and crud.get_movie_by_id(movie_id):
                 
+                score = self.options.data
                 rating = crud.get_rating(movie_id, user_id)
                 
                  # if user has not rated the movie before
                 if not rating:
-                    score = self.options.data
                     new_rating = crud.create_rating(user_id, movie_id, score)
                     db.session.add(new_rating)
-                    db.session.commit()
                     flash(f'get_rating({movie_id}, {user_id}):\n{crud.get_rating(movie_id, user_id)}')
                     
                  # if user has already submited a rating for this movie
                 else:
-                    new_score = self.options.data
                     old_rating = crud.get_rating(movie_id, user_id)
-                    old_rating.rating_score = new_score
-                    db.session.commit()
+                    old_rating.rating_score = score
                     flash(f'get_rating({movie_id}, {user_id}):\n{crud.get_rating(movie_id, user_id)}')
                 
-                flash(f'{crud.get_user_by_id(user_id).user_name} rated {crud.get_movie_by_id(movie_id).movie_title} with a score of {new_score} out of 5')
+                flash(f'{crud.get_user_by_id(user_id).user_name} rated {crud.get_movie_by_id(movie_id).movie_title} with a score of {score} out of 5', 'success')
+                db.session.commit()
+                
             else:
-                flash('Error rating movie! Try again.')
+                flash('Error rating movie! Try again.', 'danger')
         else:
-            flash('Log in to rate movies!')
+            flash('Log in to rate movies!', 'danger')
         
         return redirect(f'/movies/{movie_id}')

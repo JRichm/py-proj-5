@@ -72,17 +72,6 @@ def get_rating(movie_id, user_id):
         return user_rating  
     else:
         return None
-    
-
-""" #      Update Methods       # """
-  # movies
-  
-  # users
-
-  # ratings
-def update_rating(old_rating, new_score):
-    pass
-
 
 """ #      Server Methods       # """
 if __name__ == '__main__':

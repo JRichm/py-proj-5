@@ -9,7 +9,7 @@ main > * {
     margin: 25px;
 }
 
-main h1, p, label {
+section h1, p, label {
     color: white;
 }
 
