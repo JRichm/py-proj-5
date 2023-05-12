@@ -3,15 +3,6 @@
 from model import db, User, Movie, Rating, connect_to_db
 
 """ #    Contructor Methods    # """
-
-def create_user(username, password, email):
-    user = User(
-        user_name=username,
-        user_password=password,
-        user_email=email
-    )
-    return user
-
 def create_movie(title, description, release_date, poster_path):
     movie = Movie(
         movie_title = title,
@@ -20,6 +11,14 @@ def create_movie(title, description, release_date, poster_path):
         movie_poster_path = poster_path
     )
     return movie
+
+def create_user(username, password, email):
+    user = User(
+        user_name=username,
+        user_password=password,
+        user_email=email
+    )
+    return user
     
 def create_rating(user, movie, score):
     rating = Rating(rating_score=score, rating_movie_id=movie, rating_user_id=user)
@@ -66,6 +65,23 @@ def get_movie_avg_rating(movie_id):
     else:
         ratings = 'No Data'
     return ratings
+
+def movie_rated_by_user(movie_id, user_id):
+    user_rating = Rating.query.filter(Rating.rating_movie_id==movie_id).filter(Rating.rating_user_id==user_id).first()
+    if user_rating:
+        return user_rating  
+    else:
+        return None
+    
+
+""" #      Update Methods       # """
+  # movies
+  
+  # users
+
+  # ratings
+def update_rating(old_rating, new_score):
+    pass
 
 
 """ #      Server Methods       # """
